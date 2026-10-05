@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invoices</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1 data-i18n="title"></h1>
+    <div class="header-actions">
+      <select id="uiLang" aria-label="Language">
+        <option value="es">Español</option>
+        <option value="en">English</option>
+      </select>
+      <button id="newBtn" class="primary" data-i18n="newInvoice"></button>
+    </div>
+  </header>
+
+  <main>
+    <section id="listView">
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="number"></th><th data-i18n="client"></th><th data-i18n="date"></th>
+            <th class="right" data-i18n="total"></th><th data-i18n="actions"></th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <p id="empty" class="muted" data-i18n="empty" hidden></p>
+    </section>
+
+    <section id="formView" hidden>
+      <h2 id="formTitle"></h2>
+      <form id="form">
+        <div class="grid">
+          <label><span data-i18n="clientName"></span><input name="client_name" required></label>
+          <label><span data-i18n="clientEmail"></span><input name="client_email" type="email"></label>
+          <label class="span2"><span data-i18n="clientAddress"></span><input name="client_address"></label>
+          <label><span data-i18n="date"></span><input name="date" type="date" required></label>
+          <label><span data-i18n="dueDate"></span><input name="due_date" type="date"></label>
+          <label><span data-i18n="currency"></span>
+            <select name="currency">
+              <option>USD</option><option>EUR</option><option>MXN</option><option>COP</option>
+              <option>ARS</option><option>CLP</option><option>PEN</option><option>GBP</option>
+            </select>
+          </label>
+          <label><span data-i18n="invoiceLang"></span>
+            <select name="lang"><option value="es">Español</option><option value="en">English</option></select>
+          </label>
+        </div>
+
+        <h3 data-i18n="items"></h3>
+        <div id="items"></div>
+        <button type="button" id="addItem" data-i18n="addItem"></button>
+
+        <div class="grid">
+          <label><span data-i18n="taxRate"></span><input name="tax_rate" type="number" min="0" max="100" step="0.01" value="0"></label>
+          <label><span data-i18n="discount"></span><input name="discount" type="number" min="0" max="100" step="0.01" value="0"></label>
+          <label class="span2"><span data-i18n="notes"></span><textarea name="notes" rows="2"></textarea></label>
+        </div>
+
+        <dl class="totals">
+          <dt data-i18n="subtotal"></dt><dd id="tSubtotal"></dd>
+          <dt data-i18n="discount"></dt><dd id="tDiscount"></dd>
+          <dt data-i18n="tax"></dt><dd id="tTax"></dd>
+          <dt><strong data-i18n="total"></strong></dt><dd><strong id="tTotal"></strong></dd>
+        </dl>
+
+        <p id="formError" class="error" hidden></p>
+        <div class="form-actions">
+          <button type="button" id="cancelBtn" data-i18n="cancel"></button>
+          <button type="submit" class="primary" data-i18n="save"></button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
