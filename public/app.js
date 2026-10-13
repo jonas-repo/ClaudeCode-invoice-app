@@ -4,7 +4,7 @@ let uiLang = 'es';
 let editingId = null;
 let invoices = [];
 
-try { uiLang = localStorage.getItem('uiLang') || 'es'; } catch {}
+try { uiLang = localStorage.getItem('uiLang') || 'es'; } catch { /* storage unavailable: keep default */ }
 if (!I18N[uiLang]) uiLang = 'es';
 
 const t = (key) => I18N[uiLang][key];
@@ -150,7 +150,7 @@ $('#newBtn').addEventListener('click', () => showForm(null));
 $('#cancelBtn').addEventListener('click', showList);
 $('#uiLang').addEventListener('change', (e) => {
   uiLang = e.target.value;
-  try { localStorage.setItem('uiLang', uiLang); } catch {}
+  try { localStorage.setItem('uiLang', uiLang); } catch { /* storage unavailable: not persisted */ }
   applyI18n();
 });
 

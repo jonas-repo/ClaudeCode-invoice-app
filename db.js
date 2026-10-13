@@ -1,7 +1,8 @@
 const { DatabaseSync } = require('node:sqlite');
 const path = require('path');
+const { computeTotals } = require('./totals');
 
-const db = new DatabaseSync(path.join(__dirname, 'invoices.db'));
+const db = new DatabaseSync(process.env.DB_PATH || path.join(__dirname, 'invoices.db'));
 db.exec('PRAGMA foreign_keys = ON');
 db.exec(`
   CREATE TABLE IF NOT EXISTS invoices (
@@ -27,14 +28,6 @@ db.exec(`
     unit_price REAL NOT NULL
   );
 `);
-
-function computeTotals(invoice) {
-  const subtotal = invoice.items.reduce((s, i) => s + i.quantity * i.unit_price, 0);
-  const discountAmount = subtotal * (invoice.discount / 100);
-  const taxable = subtotal - discountAmount;
-  const taxAmount = taxable * (invoice.tax_rate / 100);
-  return { subtotal, discountAmount, taxAmount, total: taxable + taxAmount };
-}
 
 function withItems(row) {
   if (!row) return null;

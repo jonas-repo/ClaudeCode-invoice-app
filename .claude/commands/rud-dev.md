@@ -1,0 +1,1 @@
+run lint, run only 2 unit tests, validate with a build, then start the dev server using `npm start`.

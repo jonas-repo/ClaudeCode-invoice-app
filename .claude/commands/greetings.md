@@ -1,0 +1,1 @@
+When I greeting you with a Hello you have to answer me on a kind way and I will like that you add the current time, date and city, also add a famous phrase to get motivation like Chinese proverb 
